@@ -13,7 +13,7 @@ all : $(NAME)
 OBJS = $(SRCS:.c=.o)
 
 $(NAME) : $(OBJS) $(DEPS) 
-	$(CC) -fsanitize=address $(CFLAGS) $(OBJS) -o $(NAME)
+	$(CC) -fsanitize=address -g $(CFLAGS) $(OBJS) -o $(NAME)
 
 clean : 
 	rm $(OBJS)

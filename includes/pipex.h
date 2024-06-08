@@ -6,7 +6,7 @@
 /*   By: dasargsy <dasargsy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 09:33:52 by dasargsy          #+#    #+#             */
-/*   Updated: 2024/06/08 15:16:00 by dasargsy         ###   ########.fr       */
+/*   Updated: 2024/06/08 18:56:31 by dasargsy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,12 @@
 # include <string.h>
 # include "gnl.h"
 
-char	*get_initial_data(char	**argv);
+char	*get_initial_data(char	**argv, int argc);
+char	*get_command_path(char **envp, char *command);
+char	**get_com_args(char	*str);
+void	put_to_file(char **argv, char	*data, char *filename);
+void	exec_command(char	*str, char **envp);
+char	*get_command(char	*str);
+
 
 #endif

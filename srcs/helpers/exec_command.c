@@ -1,37 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_bonus.c                                      :+:      :+:    :+:   */
+/*   exec_command.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dasargsy <dasargsy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/07 18:14:41 by dasargsy          #+#    #+#             */
-/*   Updated: 2024/06/08 19:04:17 by dasargsy         ###   ########.fr       */
+/*   Created: 2024/06/08 15:51:28 by dasargsy          #+#    #+#             */
+/*   Updated: 2024/06/08 18:57:01 by dasargsy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/pipex.h"
+#include "../../includes/pipex.h"
 
-
-int	main(int argc, char **argv, char **envp)
+void	exec_command(char	*str, char **envp)
 {
-	int		pid;
-	int		i;
-	char	*data;
+	char	*command;
+	char	**args;
 
-	i = 0;
-	data = NULL;
-	pid = 0;
-	if (argc < 5)
+	command = get_command_path(envp, get_command(str));
+	args = get_com_args(str);
+	if (execve(command, args, envp) == -1)
 	{
-		write(2, "Error: Not enough arguments\n", 28);
-		return (1);
+		perror("Error");
+		free(command);
+		free(args);
+		exit(1);
 	}
-	data = get_initial_data(argv, argc);
-	if (data == NULL)
-	{
-		write(2, "Error: Not enough arguments\n", 28);
-		return (1);
-	}
-	get_command_path(envp, get_command(argv[2]));
 }

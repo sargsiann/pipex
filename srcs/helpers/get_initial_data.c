@@ -6,7 +6,7 @@
 /*   By: dasargsy <dasargsy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 18:32:00 by dasargsy          #+#    #+#             */
-/*   Updated: 2024/06/08 15:31:41 by dasargsy         ###   ########.fr       */
+/*   Updated: 2024/06/08 16:25:31 by dasargsy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,22 @@ static char	*get_from_here_doc(char	**argv)
 	return (data);
 }
 
-char	*get_initial_data(char	**argv)
+char	*get_initial_data(char	**argv, int argc)
 {
 	int		fd;
 	char	*data;
 
 	fd = 0;
+	data = NULL;
 	if (ft_strncmp(argv[1], "here_doc", 8) == 0)
+	{
+		if (argc < 6)
+		{
+			write(2, "Error: Not enough arguments\n", 28);
+			exit(1);
+		}
 		data = get_from_here_doc(argv);
+	}
 	else
 	{
 		fd = open(argv[1], O_RDONLY);
