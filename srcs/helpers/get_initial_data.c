@@ -6,22 +6,25 @@
 /*   By: dasargsy <dasargsy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 18:32:00 by dasargsy          #+#    #+#             */
-/*   Updated: 2024/06/07 19:48:25 by dasargsy         ###   ########.fr       */
+/*   Updated: 2024/06/08 15:31:41 by dasargsy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/pipex.h"
 
-static char	*get_from_file(char **argv, int fd)
+static char	*get_from_file(int fd)
 {
 	char	*data;
 	char	*tmp;
 
-	data = NULL;
+	data = ft_strdup("");
 	tmp = NULL;
 	tmp = get_next_line(fd);
 	while (tmp)
+	{
 		data = ft_gstrjoin(data, tmp, 1, 1);
+		tmp = get_next_line(fd);
+	}
 	return (data);
 }
 
@@ -30,7 +33,7 @@ static char	*get_from_here_doc(char	**argv)
 	char	*data;
 	char	*tmp;
 
-	data = NULL;
+	data = ft_strdup("");
 	tmp = NULL;
 	while (1)
 	{
@@ -49,9 +52,7 @@ char	*get_initial_data(char	**argv)
 
 	fd = 0;
 	if (ft_strncmp(argv[1], "here_doc", 8) == 0)
-	{
 		data = get_from_here_doc(argv);
-	}
 	else
 	{
 		fd = open(argv[1], O_RDONLY);
@@ -60,7 +61,8 @@ char	*get_initial_data(char	**argv)
 			perror("open");
 			exit(1);
 		}
-		data = get_from_file(argv, fd);
+		data = get_from_file(fd);
+		close(fd);
 	}
 	return (data);
 }

@@ -1,21 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_data_to_file.c                                 :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dasargsy <dasargsy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/07 19:41:21 by dasargsy          #+#    #+#             */
-/*   Updated: 2024/06/08 15:31:58 by dasargsy         ###   ########.fr       */
+/*   Created: 2024/01/15 19:59:04 by dasargsy          #+#    #+#             */
+/*   Updated: 2024/06/08 15:30:48 by dasargsy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/pipex.h"
+#include "../../includes/libft.h"
 
-void	put_to_file(char **argv, void	*data, char *filename)
+char	*ft_strdup(char const *str)
 {
-	if (ft_strncmp(argv[1], "here_doc", 8) == 0)
+	int		size;
+	int		i;
+	char	*a;
+
+	size = ft_strlen(str);
+	i = 0;
+	a = (char *)malloc(size + 1);
+	if (str == NULL || !a)
+		return (NULL);
+	while (str[i] != '\0')
 	{
-		
+		a[i] = str[i];
+		i++;
 	}
+	a[i] = '\0';
+	return (a);
 }
