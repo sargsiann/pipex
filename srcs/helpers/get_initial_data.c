@@ -6,7 +6,7 @@
 /*   By: dasargsy <dasargsy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 18:32:00 by dasargsy          #+#    #+#             */
-/*   Updated: 2024/06/08 16:25:31 by dasargsy         ###   ########.fr       */
+/*   Updated: 2024/06/08 19:35:32 by dasargsy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,11 @@ static char	*get_from_here_doc(char	**argv)
 	while (1)
 	{
 		tmp = get_next_line(0);
-		if (ft_strncmp(tmp, argv[2], ft_strlen(argv[2])) == 0)
-			break ;
+		if (ft_strncmp(argv[2], tmp, ft_gstrlen(tmp) - 1) == 0)
+		{
+			free(tmp);
+			return (data);		
+		}
 		data = ft_gstrjoin(data, tmp, 1, 1);
 	}
 	return (data);

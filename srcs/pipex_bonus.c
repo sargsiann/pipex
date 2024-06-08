@@ -6,7 +6,7 @@
 /*   By: dasargsy <dasargsy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 18:14:41 by dasargsy          #+#    #+#             */
-/*   Updated: 2024/06/08 19:04:17 by dasargsy         ###   ########.fr       */
+/*   Updated: 2024/06/08 19:35:29 by dasargsy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,5 @@ int	main(int argc, char **argv, char **envp)
 		write(2, "Error: Not enough arguments\n", 28);
 		return (1);
 	}
-	get_command_path(envp, get_command(argv[2]));
+	//system("leaks pipex");
 }

@@ -6,7 +6,7 @@
 /*   By: dasargsy <dasargsy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 15:33:16 by dasargsy          #+#    #+#             */
-/*   Updated: 2024/06/08 19:15:49 by dasargsy         ###   ########.fr       */
+/*   Updated: 2024/06/08 19:35:22 by dasargsy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ static	char	*search_for_exact(char	*command, char	*folder)
 			free_folders(folders);
 			return (path);
 		}
+		free(path);
 		i++;
 	}
 	free_folders(folders);
@@ -65,7 +66,7 @@ char	*get_command_path(char **envp, char *command)
 	int		equal;
 
 	i = 0;
-	folder = ft_strdup("");
+	folder = NULL;
 	path = NULL;
 	equal = 0;
 	while (envp[i])
@@ -81,9 +82,8 @@ char	*get_command_path(char **envp, char *command)
 			free(folder);
 			return (path);
 		}
+		free(path);
 		i++;
 	}
 	return (NULL);
 }
-
-
