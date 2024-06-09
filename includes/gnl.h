@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gnl.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dasargsy <dasargsy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dasargsy <dasargsy@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 16:46:16 by dasargsy          #+#    #+#             */
-/*   Updated: 2024/05/30 20:53:37 by dasargsy         ###   ########.fr       */
+/*   Updated: 2024/06/09 22:02:31 by dasargsy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <fcntl.h>
 # include <stdlib.h>
 # include <limits.h>
+# define OPEN_MAX 4096
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1
