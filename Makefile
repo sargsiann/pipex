@@ -19,7 +19,7 @@ clean :
 	rm $(OBJS)
 
 fclean : clean
-	rm -rf pipex
+	rm pipex
 
 re : fclean all
 
