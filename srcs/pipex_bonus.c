@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dasargsy <dasargsy@student.42yerevan.am    +#+  +:+       +#+        */
+/*   By: dasargsy <dasargsy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 18:14:41 by dasargsy          #+#    #+#             */
-/*   Updated: 2024/06/10 01:05:48 by dasargsy         ###   ########.fr       */
+/*   Updated: 2024/06/11 14:02:12 by dasargsy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,13 @@
 int	main(int argc, char **argv, char **envp)
 {
 	int		pid;
+	int		pid2;
 	int		i;
-	int		call[2];
-	int		callback[2];
+	int		fds[2];
 
-	i = 0;
+	i = 2;
 	pid = 0;
+	pid2 = 0;
 	if (argc < 5)
 	{
 		write(2, "Error: Not enough arguments\n", 28);
@@ -29,21 +30,7 @@ int	main(int argc, char **argv, char **envp)
 	}
 	while (argv[i + 1] != NULL)
 	{
-		if (pipe(call) == -1)
-		{
-			perror("pipe");
-			return (1);
-		}
-		pid = fork();
-		if (i == 1)
-			get_initial_data(argv, argc, call);
-		else
-			get_data_from_child(callback);
-		if (pid == -1)
-		{
-			perror("fork");
-			return (1);
-		}
-		give_data_to_child_exec(pid);
+		fork_logic(fds, argv, i, envp);
+		i++;
 	}
 }

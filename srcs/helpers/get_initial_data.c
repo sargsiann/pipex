@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_initial_data.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dasargsy <dasargsy@student.42yerevan.am    +#+  +:+       +#+        */
+/*   By: dasargsy <dasargsy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 18:32:00 by dasargsy          #+#    #+#             */
-/*   Updated: 2024/06/10 00:42:21 by dasargsy         ###   ########.fr       */
+/*   Updated: 2024/06/11 14:21:11 by dasargsy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

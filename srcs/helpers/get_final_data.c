@@ -1,33 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_command.c                                     :+:      :+:    :+:   */
+/*   get_final_data.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dasargsy <dasargsy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/08 15:51:28 by dasargsy          #+#    #+#             */
-/*   Updated: 2024/06/11 14:28:15 by dasargsy         ###   ########.fr       */
+/*   Created: 2024/06/11 14:02:18 by dasargsy          #+#    #+#             */
+/*   Updated: 2024/06/11 14:21:08 by dasargsy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/pipex.h"
 
-void	exec_command(char	*str, char **envp, int fds[2])
+char	*get_final_data(int fd)
 {
-	char	*command;
-	char	**args;
+	char	*data;
+	char	*tmp;
 
-	command = get_command_path(envp, get_command(str));
-	args = get_com_args(str);
-	if (execve(command, args, envp) == -1)
+	data = ft_strdup("");
+	tmp = NULL;
+	while (1)
 	{
-		perror("Error");
-		free(command);
-		free(args);
-		exit(1);
+		tmp = get_next_line(0);
+		if (!tmp)
+			break ;
+		data = ft_gstrjoin(data, tmp, 1, 1);
 	}
-	free(command);
-	free(args);
-	close(fds[1]);
-	exit(0);
+	return (data);
 }
