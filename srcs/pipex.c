@@ -6,7 +6,7 @@
 /*   By: dasargsy <dasargsy@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 09:31:44 by dasargsy          #+#    #+#             */
-/*   Updated: 2024/06/12 10:17:38 by dasargsy         ###   ########.fr       */
+/*   Updated: 2024/06/12 12:32:50 by dasargsy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,12 @@ int main(int argc, char **argv, char **envp)
     {
         write(2, "Error: Pipe error\n", 18);
         return (1);
+    }
+    init_data_to_pipe(argc, argv);
+    while (argv[i + 2] != NULL)
+    {
+        logic(argv, envp, i);
+        i++;
     }
     return (0);
 }

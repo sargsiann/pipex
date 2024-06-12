@@ -6,57 +6,72 @@
 /*   By: dasargsy <dasargsy@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 10:48:40 by dasargsy          #+#    #+#             */
-/*   Updated: 2024/06/12 11:19:37 by dasargsy         ###   ########.fr       */
+/*   Updated: 2024/06/12 12:35:34 by dasargsy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/pipex.h"
 
-void    logic(char **argv, char **envp, int i)
+void    wait_get_status(int pid1, int pid2, int fds[2])
 {
-    int		fd[2];
-    int		pid;
-    int		status;
+    int status;
 
-    if (pipe(fd) == -1)
+    waitpid(pid1, &status, 0);
+    if (WIFEXITED(status))
     {
-        perror("Error");
-        exit(1);
-    }
-    pid = fork();
-    if (pid == -1)
-    {
-        perror("Error");
-        exit(1);
-    }
-    if (pid == 0)
-    {
-        dup2(fd[1], 1);
-        close(fd[0]);
-        close(fd[1]);
-        exec_command(argv[i], envp);
-    }
-    else
-    {
-        waitpid(pid, &status, 0);
-        pid = fork();
-        if (pid == -1)
+        if (WEXITSTATUS(status) != 0)
         {
-            perror("Error");
+            perror("Error: ");
             exit(1);
         }
-        if (pid == 0)
+    }
+    waitpid(pid2, &status, 0);
+    if (WIFEXITED(status))
+    {
+        if (WEXITSTATUS(status) != 0)
         {
-            dup2(fd[0], 0);
-            close(fd[0]);
-            close(fd[1]);
-            exec_command(argv[i], envp);
-        }
-        else
-        {
-            waitpid(pid, &status, 0);
-            close(fd[0]);
-            close(fd[1]);
+            perror("Error: ");
+            exit(1);
         }
     }
+    if (close(fds[0]) == -1)
+    {
+        perror("Error: ");
+        exit(1);
+    }
+    if (close(fds[1]) == -1)
+    {
+        perror("Error: ");
+        exit(1);
+    }
+}
+
+void    logic(char **argv, char **envp, int i)
+{
+    int fds[2];
+    int pid1;
+    int pid2;
+
+    if (pipe(fds) == -1)
+    {
+        perror("Error: ");
+        exit(1);
+    }
+    pid1 = fork();
+    if (pid1 == -1)
+    {
+        perror("Error: ");
+        exit(1);
+    }
+    if (pid1 == 0)
+        child1(fds, argv, i, envp);
+    pid2 = fork();
+    if (pid2 == -1)
+    {
+        perror("Error: ");
+        exit(1);
+    }
+    if (pid2 == 0)
+        child2(fds, argv, i + 1, envp);
+    wait_get_status(pid1, pid2, fds);
 }

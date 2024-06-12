@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_command_arguments.c                            :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dasargsy <dasargsy@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/12 10:07:53 by dasargsy          #+#    #+#             */
-/*   Updated: 2024/06/12 12:42:22 by dasargsy         ###   ########.fr       */
+/*   Created: 2024/01/15 19:59:04 by dasargsy          #+#    #+#             */
+/*   Updated: 2024/06/12 12:38:22 by dasargsy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/pipex.h"
+#include "../../includes/libft.h"
 
-char    **get_comm_args(char *str)
+char	*ft_strdup(char const *str)
 {
-    char    **args;
- 
-    args = ft_split(str, ' ', 0);
-    if (args == NULL)
-    {
-        write(2, "Error: Split error\n", 19);
-        exit(1);
-    }
-    return (args);
+	int		size;
+	int		i;
+	char	*a;
+
+	size = ft_strlen(str);
+	i = 0;
+	a = (char *)malloc(size + 1);
+	if (str == NULL || !a)
+		return (NULL);
+	while (str[i] != '\0')
+	{
+		a[i] = str[i];
+		i++;
+	}
+	a[i] = '\0';
+	return (a);
 }

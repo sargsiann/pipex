@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dasargsy <dasargsy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dasargsy <dasargsy@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 20:39:58 by dasargsy          #+#    #+#             */
-/*   Updated: 2024/05/25 11:27:01 by dasargsy         ###   ########.fr       */
+/*   Updated: 2024/06/12 12:39:55 by dasargsy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static void	fill_splited(char **splitted, char const *s, char c)
 	}
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c, int flag)
 {
 	size_t	size;
 	char	**splitted;
@@ -104,5 +104,7 @@ char	**ft_split(char const *s, char c)
 	splitted[size] = NULL;
 	if (!splitted)
 		return (NULL);
+	if (flag)
+		free((char *)s);
 	return (splitted);
 }
