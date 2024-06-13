@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   logic.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dasargsy <dasargsy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dasargsy <dasargsy@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 16:58:11 by dasargsy          #+#    #+#             */
-/*   Updated: 2024/06/13 19:13:31 by dasargsy         ###   ########.fr       */
+/*   Updated: 2024/06/13 23:17:44 by dasargsy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,11 @@ static void	wait_for_status(int pid)
 		exit1 = WEXITSTATUS(status);
 		if (exit1 == EXIT_FAILURE)
 		{
-			perror("child wrong");
 			exit(EXIT_FAILURE);
 		}
 	}
+	else
+		exit(0);
 }
 
 static void	close_fds(int *fds)
@@ -74,6 +75,7 @@ void	logic(char **argv, char **envp, int argc)
 	}
 	if (pid2 == 0)
 		out_process(argv, envp, fds, argc);
-	wait_for_status(pid2);
 	close_fds(fds);
+	wait_for_status(pid1);
+	wait_for_status(pid2);
 }

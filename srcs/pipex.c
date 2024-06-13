@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dasargsy <dasargsy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dasargsy <dasargsy@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 15:39:57 by dasargsy          #+#    #+#             */
-/*   Updated: 2024/06/13 19:11:29 by dasargsy         ###   ########.fr       */
+/*   Updated: 2024/06/13 21:25:10 by dasargsy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,4 @@ int	main(int argc, char **argv, char **envp)
 		return (1);		
 	}
 	logic(argv, envp, argc);
-	system("leaks pipex");
 }

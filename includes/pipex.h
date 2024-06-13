@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dasargsy <dasargsy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dasargsy <dasargsy@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 15:40:27 by dasargsy          #+#    #+#             */
-/*   Updated: 2024/06/13 18:26:14 by dasargsy         ###   ########.fr       */
+/*   Updated: 2024/06/13 21:16:02 by dasargsy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <string.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <sys/wait.h>
 
 char	*get_command_path(char **envp, char *command);
 char	*get_command(char	*str);
