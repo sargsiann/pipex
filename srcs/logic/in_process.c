@@ -3,14 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   in_process.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dasargsy <dasargsy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dasargsy <dasargsy@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 16:13:46 by dasargsy          #+#    #+#             */
-/*   Updated: 2024/06/13 18:15:55 by dasargsy         ###   ########.fr       */
+/*   Updated: 2024/06/14 06:31:11 by dasargsy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/pipex.h"
+
+static	void	get_from_here_doc(int pipe_fds[2], char *limiter)
+{
+	char	*line;
+
+	line = NULL;
+	while (1)
+	{
+		line = get_next_line(STDIN_FILENO);
+		if (ft_strncmp(line, limiter, ft_strlen(limiter)) == 0)
+		{
+			free(line);
+			break ;
+		}
+		write(pipe_fds[1], line, ft_strlen(line));
+		free(line);
+	}
+	close(pipe_fds[1]);
+}
 
 static	void	dup_file_descriptor(char	*file)
 {
@@ -62,6 +81,9 @@ void	in_process(char **argv, char **envp, int pipe_fds[2])
 	char	*file_name;
 
 	file_name = argv[1];
-	dup_file_descriptor(file_name);
+	if (ft_strncmp(file_name, "here_doc", 8) == 0)
+		get_from_here_doc(pipe_fds, argv[2]);
+	else
+		dup_file_descriptor(file_name);
 	exec(argv, envp, pipe_fds);
 }

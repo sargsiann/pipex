@@ -5,77 +5,86 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dasargsy <dasargsy@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/13 16:58:11 by dasargsy          #+#    #+#             */
-/*   Updated: 2024/06/13 23:17:44 by dasargsy         ###   ########.fr       */
+/*   Created: 2024/06/14 06:23:56 by dasargsy          #+#    #+#             */
+/*   Updated: 2024/06/14 06:40:57 by dasargsy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/pipex.h"
 
-static void	wait_for_status(int pid)
+static  void    start(char **argv, int argc, char **envp)
 {
-	int	status;
-	int	exit1;
+    int pid;
+    int fds[2];
 
-	if (waitpid(pid, &status, 0) == -1)
-	{
-		perror("waitpid");
-		exit(EXIT_FAILURE);
-	}
-	else if (WIFEXITED(status))
-	{
-		exit1 = WEXITSTATUS(status);
-		if (exit1 == EXIT_FAILURE)
-		{
-			exit(EXIT_FAILURE);
-		}
-	}
-	else
-		exit(0);
+    if (pipe(fds[2]) == -1)
+    {
+        perror("pipe");
+        exit(1);
+    }
+    pid = fork();
+    if (pid == -1)
+    {
+        perror("fork");        
+        exit(1);
+    }
+    if (pid == 0)
+        in_process(argv, envp, fds);
+    else
+    {
+        if (waitpid(pid, NULL, 0) == -1)
+        {
+            perror("waitpid");
+            exit(1);
+        }
+    }
+    if (close(fds[1]) == -1 || close(fds[0]) == -1)
+    {
+        perror("close");
+        exit(1);
+    }
 }
 
-static void	close_fds(int *fds)
+static  void    start(char **argv, int argc, char **envp)
 {
-	if (close(fds[0]) == -1)
-	{
-		perror("close");
-		exit(EXIT_FAILURE);
-	}
-	if (close(fds[1]) == -1)
-	{
-		perror("close");
-		exit(EXIT_FAILURE);
-	}
+    int pid;
+    int fds[2];
+
+    if (pipe(fds[2]) == -1)
+    {
+        perror("pipe");
+        exit(1);
+    }
+    pid = fork();
+    if (pid == -1)
+    {
+        perror("fork");        
+        exit(1);
+    }
+    if (pid == 0)
+        out_process(argv, envp, fds, argc);
+    else
+    {
+        if (waitpid(pid, NULL, 0) == -1)
+        {
+            perror("waitpid");
+            exit(1);
+        }
+    }
+    if (close(fds[1]) == -1 || close(fds[0]) == -1)
+    {
+        perror("close");
+        exit(1);
+    }
 }
 
-void	logic(char **argv, char **envp, int argc)
+void    logic(char **envp, char **argv, int argc)
 {
-	int	pid1;
-	int	pid2;
-	int	fds[2];
+    int i;
 
-	if (pipe(fds) == -1)
-	{
-		perror("pipe");
-		exit(EXIT_FAILURE);
-	}
-	pid1 = fork();
-	if (pid1 == -1)
-	{
-		perror("fork");
-		exit(EXIT_FAILURE);
-	}
-	if (pid1 == 0)
-		in_process(argv, envp, fds);
-	pid2 = fork();
-	if (pid2 == -1)
-	{
-		perror("pipe");
-		exit(EXIT_FAILURE);
-	}
-	if (pid2 == 0)
-		out_process(argv, envp, fds, argc);
-	close_fds(fds);
-	wait_for_status(pid1);
-	wait_for_status(pid2);
+    i = 2;
+    if (ft_strncmp(argv[1], "here_doc", 8) == 0)
+        i = 3;
+    start(argv, i, envp);
+    while (i < argc - 1);
 }
