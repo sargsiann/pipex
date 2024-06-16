@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   in_process.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dasargsy <dasargsy@student.42yerevan.am    +#+  +:+       +#+        */
+/*   By: dasargsy <dasargsy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 16:13:46 by dasargsy          #+#    #+#             */
-/*   Updated: 2024/06/14 06:31:11 by dasargsy         ###   ########.fr       */
+/*   Updated: 2024/06/16 15:41:32 by dasargsy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,32 +49,32 @@ static	void	dup_file_descriptor(char	*file)
 	close(fd);
 }
 
-static	void	exec(char **argv, char **envp, int pipe_fds[2])
-{
-	char	*command_path;
-	char	*command;
-	char	**arguments;
+// static	void	exec(char **argv, char **envp, int pipe_fds[2])
+// {
+// 	char	*command_path;
+// 	char	*command;
+// 	char	**arguments;
 
-	command_path = NULL;
-	command = NULL;
-	arguments = NULL;
-	if (close(pipe_fds[0]) == -1)
-	{
-		perror("close");
-		exit(EXIT_FAILURE);
-	}
-	if (dup2(pipe_fds[1], STDOUT_FILENO) == -1)
-	{
-		perror("dup2");
-		exit(EXIT_FAILURE);
-	}
-	close(pipe_fds[1]);
-	command = get_command(argv[2]);
-	command_path = get_command_path(envp, command);
-	free(command);
-	arguments = get_com_args(argv[2]);
-	exec_command(command_path, arguments, envp);
-}
+// 	command_path = NULL;
+// 	command = NULL;
+// 	arguments = NULL;
+// 	if (close(pipe_fds[0]) == -1)
+// 	{
+// 		perror("close");
+// 		exit(EXIT_FAILURE);
+// 	}
+// 	if (dup2(pipe_fds[1], STDOUT_FILENO) == -1)
+// 	{
+// 		perror("dup2");
+// 		exit(EXIT_FAILURE);
+// 	}
+// 	close(pipe_fds[1]);
+// 	command = get_command(argv[2]);
+// 	command_path = get_command_path(envp, command);
+// 	free(command);
+// 	arguments = get_com_args(argv[2]);
+// 	exec_command(command_path, arguments, envp);
+// }
 
 void	in_process(char **argv, char **envp, int pipe_fds[2])
 {
@@ -85,5 +85,5 @@ void	in_process(char **argv, char **envp, int pipe_fds[2])
 		get_from_here_doc(pipe_fds, argv[2]);
 	else
 		dup_file_descriptor(file_name);
-	exec(argv, envp, pipe_fds);
+	//exec(argv, envp, pipe_fds);
 }

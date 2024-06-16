@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dasargsy <dasargsy@student.42yerevan.am    +#+  +:+       +#+        */
+/*   By: dasargsy <dasargsy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 15:40:27 by dasargsy          #+#    #+#             */
-/*   Updated: 2024/06/13 21:16:02 by dasargsy         ###   ########.fr       */
+/*   Updated: 2024/06/16 15:00:56 by dasargsy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ void	exec_command(char *command_path, char **args, char **envp);
 void	in_process(char **argv, char **envp, int pipe_fds[2]);
 void	logic(char **argv, char **envp, int argc);
 void	out_process(char **argv, char **envp, int pipe_fds[2], int argc);
+void	middle_proccesses(int i, int argc, char **argv, char **envp);
 
 #endif
