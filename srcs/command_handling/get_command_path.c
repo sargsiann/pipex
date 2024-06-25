@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_command_path.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dasargsy <dasargsy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dasargsy <dasargsy@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 15:33:16 by dasargsy          #+#    #+#             */
-/*   Updated: 2024/06/13 16:35:59 by dasargsy         ###   ########.fr       */
+/*   Updated: 2024/06/26 02:25:21 by dasargsy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,7 @@ char	*get_command_path(char **envp, char *command)
 		else
 			path = ft_gstrjoin(folder, command, 1, 0);
 		if (access(path, F_OK) == 0)
-		{
-			free(folder);
 			return (path);
-		}
 		i++;
 	}
 	return (NULL);

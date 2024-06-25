@@ -1,27 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   logic.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dasargsy <dasargsy@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/13 20:58:12 by dasargsy          #+#    #+#             */
-/*   Updated: 2024/06/26 01:11:30 by dasargsy         ###   ########.fr       */
+/*   Created: 2024/06/25 23:48:45 by dasargsy          #+#    #+#             */
+/*   Updated: 2024/06/26 03:13:27 by dasargsy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/libft.h"
+#include "../../includes/pipex.h"
 
-size_t	ft_strlen(char const *c)
+void    logic(char **argv, char **envp, int argc)
 {
-	size_t	i;
-
-	i = 0;
-	if (!c)
-		return (0);
-	while (c[i] != '\0')
-	{
-		i++;
-	}
-	return (i);
+    in_process(argv,2,envp);  
 }
