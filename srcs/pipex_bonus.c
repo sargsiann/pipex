@@ -6,7 +6,7 @@
 /*   By: dasargsy <dasargsy@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 15:39:57 by dasargsy          #+#    #+#             */
-/*   Updated: 2024/06/29 14:37:58 by dasargsy         ###   ########.fr       */
+/*   Updated: 2024/06/29 15:19:40 by dasargsy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,20 @@ void	execute_command(int input_fd, int output_fd, char *cmd, char **envp)
 		exit(EXIT_FAILURE);
 	}
 	else
+	{
 		close(input_fd);
+		close(output_fd);
+	}
+}
+
+static	int get_status(int pid)
+{
+	int	status;
+
+	waitpid(pid, &status, 0);
+	if (WIFEXITED(status))
+		return (WEXITSTATUS(status));
+	return (status);
 }
 
 void	execute_last_command(int input_fd, char *outfile, char *cmd, char **envp)
@@ -126,7 +139,7 @@ void	execute_last_command(int input_fd, char *outfile, char *cmd, char **envp)
 	{
 		close(input_fd);
 		close(output_fd);
-		waitpid(pid, NULL, 0);
+		exit(get_status(pid));
 	}
 }
 
