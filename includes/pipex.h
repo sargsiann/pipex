@@ -6,7 +6,7 @@
 /*   By: dasargsy <dasargsy@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 15:40:27 by dasargsy          #+#    #+#             */
-/*   Updated: 2024/06/26 00:46:53 by dasargsy         ###   ########.fr       */
+/*   Updated: 2024/06/27 13:56:16 by dasargsy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,13 @@
 char	*get_command_path(char **envp, char *command);
 char	*get_command(char	*str);
 char	**get_com_args(char	*command);
-void	exec_command(char *command_path, char **args, char **envp);
-void	logic(char **argv, char **envp, int argc);
 void    ft_error(char *message, int exit_status);
-void    in_process(char **argv, int i, char **envp);
+void	get_from_here_doc(int fds[2], char *limiter);
+void	handle_here_doc(int argc, char **argv, char **envp);
+void	handle_input_file(int argc, char **argv, char **envp);
+void	handle_commands(int infile, char **cmds, int cmd_count, char *outfile, char **envp);
+void	execute_command(int input_fd, int output_fd, char *cmd, char **envp);
+void	execute_last_command(int input_fd, char *outfile, char *cmd, char **envp);
+void    execve_command(char *cmd, char *envp[]);
+
 #endif
