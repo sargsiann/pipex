@@ -1,25 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dasargsy <dasargsy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/25 23:34:42 by dasargsy          #+#    #+#             */
-/*   Updated: 2024/06/30 16:41:29 by dasargsy         ###   ########.fr       */
+/*   Created: 2024/06/30 16:46:09 by dasargsy          #+#    #+#             */
+/*   Updated: 2024/06/30 16:48:03 by dasargsy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/libft.h"
+#include "../../includes/pipex.h"
 
-int	ft_strcmp(char *s1, char *s2)
+void	ft_error(char *message, int exit_status)
 {
-	int	i;
-
-	i = 0;
-	if (!s1 || !s2)
-		return (-1);
-	while (s1[i] && s2[i] && s1[i] == s2[i])
-		++i;
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+	write(2, message, ft_strlen(message));
+	exit(exit_status);
 }
