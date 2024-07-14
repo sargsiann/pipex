@@ -16,7 +16,7 @@ DEPS = $(shell find includes -name "*.h") Makefile
 all : $(NAME)
 
 $(NAME) : $(DEPS) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o pipex
+	$(CC) $(CFLAGS) -fsanitize=address $(OBJS) -o pipex
 
 clean :
 	rm -rf $(OBJS)

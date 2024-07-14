@@ -6,7 +6,7 @@
 /*   By: dasargsy <dasargsy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 15:39:57 by dasargsy          #+#    #+#             */
-/*   Updated: 2024/07/05 17:04:32 by dasargsy         ###   ########.fr       */
+/*   Updated: 2024/07/05 17:10:11 by dasargsy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,6 @@ int	main(int argc, char **argv, char **envp)
 	if (ft_strcmp(argv[1], "here_doc") == 0)
 		handle_here_doc(argc, argv, envp);
 	else
-	{
-		// fprintf(stderr, "error: %s\n", ARG_ERR);
 		handle_input_file(argc, argv, envp);
-	}
 	return (0);
 }

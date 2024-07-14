@@ -6,7 +6,7 @@
 /*   By: dasargsy <dasargsy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 17:21:37 by dasargsy          #+#    #+#             */
-/*   Updated: 2024/07/05 17:02:56 by dasargsy         ###   ########.fr       */
+/*   Updated: 2024/07/14 20:45:10 by dasargsy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ void	execute_command(int input_fd, int output_fd, char *cmd, char **envp)
 	}
 	else
 	{
-		waitpid(pid, NULL, 0);
+		if (ft_strcmp(cmd, "yes"))
+			waitpid(pid, NULL, 0);
 		close(input_fd);
 		close(output_fd);
 	}
